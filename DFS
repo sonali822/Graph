@@ -1,0 +1,52 @@
+DFS of Graph 
+Given a connected undirected graph. Perform a Depth First Traversal of the graph.
+Note: Use recursive approach.
+
+Input:
+The first line of the input contains an integer 'T' denoting the number of test cases. Then 'T' test cases follow. Each test case consists of two lines. Description of testcases is as follows: The First line of each test case contains two integers 'N' and 'E'  which denotes the no of vertices and no of edges respectively. The Second line of each test case contains 'E'  space separated pairs u and v denoting that there is a edge from u to v .
+
+Output:
+For each testcase, print the nodes while doing DFS starting from node 0.
+
+Your task:
+You don't need to read input or print anything. Your task is to complete the function dfs() which takes the Graph and the number of vertices as inputs and returns a list containing the DFS Traversal of the graph starting from the 0th node.
+
+Expected Time Complexity: O(V + E).
+Expected Auxiliary Space: O(V).
+
+Solution --> 
+class Traversal
+{
+    static void DFSUtil (int i, ArrayList<ArrayList<Integer>> list, int N, boolean vis[], ArrayList<Integer> res) 
+    {
+        if (vis[i]) return;
+        vis[i] = true;
+        
+        res.add (i);
+        
+        for (int j = 0; j < list.get(i).size(); j++)
+        {
+            if (!vis[list.get(i).get(j)]) 
+                DFSUtil (list.get(i).get(j), list, N, vis, res);
+        }
+    }
+    static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> list, int N)
+    {
+        
+        boolean vis[] = new boolean[N];
+        for(int i = 0; i < N; i++)
+            vis[i] = false;
+            
+        ArrayList<Integer> res = new ArrayList<Integer>(0); 
+        
+        for (int i = 0; i < N; i++)
+        {
+            if (!vis[i])
+            {
+                DFSUtil (i, list, N, vis, res);
+            }
+        }
+        
+        return res;
+    }
+}
